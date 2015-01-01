@@ -1,0 +1,7 @@
+﻿{
+    "Data": {
+        "DefaultConnection": { 
+            "ConnectionString": "Data Source=ZENON-PC;Initial Catalog=CraftingPoE;uid=CraftingPoE;pwd=1BongsonG1"
+        }
+    }
+}
