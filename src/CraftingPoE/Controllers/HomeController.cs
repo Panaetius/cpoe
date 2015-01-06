@@ -17,7 +17,7 @@ namespace CraftingPoE.Controllers
         // GET: /<controller>/
         public IActionResult Index()
         {
-            var mods = _craftingRepo.GetEffectiveMod(1);
+            var mods = _craftingRepo.GetItemType(1);
             return View();
         }
     }

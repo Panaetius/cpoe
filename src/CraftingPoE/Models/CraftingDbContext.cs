@@ -6,8 +6,7 @@ namespace CraftingPoE.Models
 {
     public class CraftingDbContext : DbContext
     {
-        public DbSet<EffectiveMod> EffectiveMods { get; set; }
-
+        public DbSet<ItemType> ItemTypes { get; set; } 
         protected override void OnConfiguring(DbContextOptions options)
         {
             options.UseSqlServer(Startup.Configuration.Get("Data:DefaultConnection:ConnectionString"));
@@ -15,14 +14,16 @@ namespace CraftingPoE.Models
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<EffectiveMod>().Key(e => e.Id);
-            builder.Entity<EffectiveMod>().OneToMany<ActualMod>(e => e.ActualMods, a => a.LinkedMod).ForeignKey(a => a.EffectiveModId).Required();
+            builder.Entity<ItemType>().Key(i => i.Id);
+            builder.Entity<ItemType>().OneToMany(i => i.Mods, i => i.ItemType);
 
-            builder.Entity<ActualMod>().Key(a => a.Id);
-            builder.Entity<ActualMod>().OneToMany(a => a.Brackets, b => b.Mod).ForeignKey(b => b.ModId);
+            builder.Entity<Mod>().Key(m => m.Id);
+            builder.Entity<Mod>().OneToMany(m => m.ItemTypes, m => m.Mod);
+            builder.Entity<Mod>().ManyToOne(m => m.Type, m => m.Mods);
 
-            builder.Entity<Bracket>().Key(b => b.Id);
+            builder.Entity<ItemTypeToMod>().Key(i => i.Id);
 
+            builder.Entity<ModType>().Key(m => m.Id);
             builder.Entity<MasterMod>().Key(m => m.Id);
 
             base.OnModelCreating(builder);

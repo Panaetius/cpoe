@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace CraftingPoE.Models
 {
@@ -6,6 +7,8 @@ namespace CraftingPoE.Models
     {
         public int Id { get; set; }
 
+        [Required]
+        [StringLength(100)]
         public string Name { get; set; }
 
         public AffixType AffixType { get; set; }
@@ -19,5 +22,7 @@ namespace CraftingPoE.Models
         public string Cost { get; set; }
 
         public string Master { get; set; }
+
+        public ModType ModType { get; set; }
     }
 }
